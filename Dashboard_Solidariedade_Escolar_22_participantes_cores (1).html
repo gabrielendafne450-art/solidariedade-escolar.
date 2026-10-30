@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Solidariedade Escolar | Pesquisa e análise</title>
+<style>
+:root{--purple:#60358a;--deep:#382052;--lilac:#cdb8e6;--pale:#f3edf9;--cream:#fffaf0;--ink:#30283a;--muted:#756b80;--line:#e6dced;--pink:#b99bd8;--blue:#647da8}
+*{box-sizing:border-box}body{margin:0;background:#f7f3fa;color:var(--ink);font-family:Arial,Helvetica,sans-serif}
+header{background:linear-gradient(120deg,#382052,#70449a);color:white;padding:34px max(22px,calc((100% - 1120px)/2))}
+.eyebrow{letter-spacing:2px;text-transform:uppercase;font-size:11px;opacity:.8;font-weight:bold}
+h1{font-size:clamp(27px,4vw,40px);margin:10px 0 8px}header p{margin:0;max-width:760px;line-height:1.55;color:#f1eafa}
+main{max-width:1120px;margin:24px auto;padding:0 18px 40px}
+.toolbar{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:18px}
+.toolbar label{font-weight:bold;color:var(--deep)}select{border:1px solid #cbb8dc;border-radius:10px;padding:11px 14px;background:white;color:var(--ink);font-size:14px}
+.note{font-size:12px;color:var(--muted)}
+.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:16px 0}
+.card{background:white;border:1px solid var(--line);border-radius:16px;padding:20px;box-shadow:0 5px 18px #3820520a}
+.kpi small{color:var(--muted);font-weight:bold}.kpi strong{display:block;font-size:34px;color:var(--purple);margin:8px 0 3px}.kpi span{font-size:12px;color:var(--muted)}
+.section-title{font-size:20px;color:var(--deep);margin:28px 0 12px}
+.charts{display:grid;grid-template-columns:1.1fr .9fr;gap:14px}
+.card h3{margin:0 0 5px;color:var(--deep);font-size:17px}.sub{font-size:12px;color:var(--muted);margin:0 0 18px;line-height:1.4}
+.chartarea{height:235px;display:flex;align-items:flex-end;justify-content:center;gap:clamp(22px,8vw,90px);padding:10px 12px 0;border-bottom:1px solid var(--line);position:relative}
+.barwrap{height:100%;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:8px;min-width:75px}
+.bar{width:62px;border-radius:10px 10px 3px 3px;background:linear-gradient(180deg,#a987cc,#60358a);min-height:4px;transition:height .25s}
+.bar.alt{background:linear-gradient(180deg,#dfd0ef,#9b7bc2)}
+.barvalue{font-weight:bold;color:var(--deep)}.barlabel{font-size:12px;color:var(--muted);padding-bottom:10px}
+.donutrow{display:flex;align-items:center;justify-content:center;gap:22px;height:235px;flex-wrap:wrap}
+.donut{width:160px;height:160px;border-radius:50%;background:conic-gradient(var(--purple) 0 27.2727%,var(--pink) 27.2727% 77.2727%,var(--blue) 77.2727% 100%);position:relative;flex:none}
+.donut:after{content:attr(data-total);position:absolute;inset:27px;background:white;border-radius:50%;display:grid;place-items:center;font-size:30px;font-weight:bold;color:var(--deep)}
+.legend{font-size:13px;line-height:2}.dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:7px}
+.insights{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.insight{border-top:4px solid var(--lilac)}.insight:nth-child(2){border-top-color:var(--pink)}.insight:nth-child(3){border-top-color:var(--blue)}
+.insight h3{font-size:15px;margin:0 0 8px;color:var(--deep)}.insight p{font-size:13px;line-height:1.55;margin:0;color:#574e61}
+.callout{background:var(--pale);border:1px solid #dfd0ed;border-radius:14px;padding:18px;line-height:1.6;font-size:14px}
+.flow{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.step{background:white;border:1px solid var(--line);border-radius:12px;padding:15px;text-align:center}.step b{display:block;color:var(--purple);margin-bottom:6px}.step span{font-size:12px;color:var(--muted);line-height:1.4}
+footer{text-align:center;color:var(--purple);font-weight:bold;margin-top:28px}
+@media(max-width:760px){.kpis,.charts,.insights{grid-template-columns:1fr}.flow{grid-template-columns:repeat(2,1fr)}.donutrow{height:auto;padding:12px 0}}
+@media print{body{background:white}.card{box-shadow:none}select{border:0}}
+</style>
+</head>
+<body>
+<header>
+ <div class="eyebrow">Inovação social & conectividade</div>
+ <h1>Solidariedade Escolar</h1>
+ <p>Pesquisa exploratória: como conectar estudantes que precisam de itens essenciais a pessoas dispostas a doar, preservando a privacidade e a dignidade de quem recebe.</p>
+</header>
+<main>
+ <div class="toolbar">
+  <div><label for="grupo">Visualizar participantes:</label> <select id="grupo"><option value="todos">Todos os participantes</option><option value="alunos">Estudantes</option><option value="professores">Professores</option><option value="comunidade">Comunidade externa</option></select></div>
+  <div class="note">Levantamento exploratório por conversas informais</div>
+ </div>
+ <section class="kpis">
+  <div class="card kpi"><small>Participantes ouvidos</small><strong id="total">17</strong><span>6 professores + 11 estudantes + 5 pessoas da comunidade</span></div>
+  <div class="card kpi"><small>Professores</small><strong id="prof">6</strong><span>Participantes da comunidade escolar</span></div>
+  <div class="card kpi"><small>Estudantes</small><strong id="alunos">11</strong><span>Participantes da comunidade escolar</span></div>
+  <div class="card kpi"><small>Comunidade externa</small><strong id="comunidade">5</strong><span>Pessoas de fora do ambiente escolar</span></div>
+ </section>
+ <h2 class="section-title">Quem participou da conversa?</h2>
+ <section class="charts">
+  <div class="card">
+   <h3>Participantes por grupo</h3><p class="sub">Quantidade de pessoas ouvidas em cada grupo. O filtro acima atualiza este gráfico.</p>
+   <div class="chartarea">
+    <div class="barwrap" id="wrapProf"><div class="barvalue" id="vProf">6</div><div class="bar" id="bProf" style="height:54px"></div><div class="barlabel">Professores</div></div>
+    <div class="barwrap" id="wrapAlunos"><div class="barvalue" id="vAlunos">11</div><div class="bar alt" id="bAlunos" style="height:99px"></div><div class="barlabel">Estudantes</div></div>
+    <div class="barwrap" id="wrapCom"><div class="barvalue" id="vCom">5</div><div class="bar" id="bCom" style="height:45px;background:linear-gradient(180deg,#9aafd1,#647da8)"></div><div class="barlabel">Comunidade</div></div>
+   </div>
+  </div>
+  <div class="card">
+   <h3>Composição do grupo ouvido</h3><p class="sub">Proporção de cada grupo entre os 17 participantes. Não representa opinião ou intenção de doação.</p>
+   <div class="donutrow"><div class="donut" id="donut" data-total="22"></div><div class="legend"><div><i class="dot" style="background:var(--purple)"></i><span id="legProf">Professores: 27,3%</span></div><div><i class="dot" style="background:var(--pink)"></i><span id="legAlunos">Estudantes: 50,0%</span></div><div><i class="dot" style="background:var(--blue)"></i><span id="legCom">Comunidade externa: 22,7%</span></div></div></div>
+  </div>
+ </section>
+ <h2 class="section-title">O que apareceu nas conversas?</h2>
+ <section class="insights">
+  <div class="card insight"><h3>Apoio à proposta</h3><p>A maioria dos participantes demonstrou apoio à ideia e considerou positiva a criação de um canal organizado de solidariedade.</p></div>
+  <div class="card insight"><h3>Interesse da comunidade</h3><p>As 5 pessoas de fora do ambiente escolar também apoiaram a proposta, acharam a plataforma interessante e disseram que fariam doações.</p></div>
+  <div class="card insight"><h3>Uma questão importante</h3><p>Uma participante perguntou se programas sociais já não atendem a essas necessidades. Isso reforçou que a plataforma deve complementar os benefícios existentes, nunca substituí-los.</p></div>
+ </section>
+ <p class="note" style="margin-top:12px">Atenção: as conversas foram informais. Os números dos gráficos representam apenas quantas pessoas foram ouvidas em cada grupo. O apoio à proposta e a disposição para doar são apresentados qualitativamente, sem porcentagens de opinião.</p>
+ <h2 class="section-title">Da pesquisa à solução</h2>
+ <div class="callout"><b>Pergunta de pesquisa:</b> Como a escola pode conectar estudantes que precisam de itens essenciais a pessoas dispostas a doar, sem expor a identidade de quem recebe?<br><br><b>Hipótese:</b> Um canal organizado pela escola, com pedidos privados e divulgação anônima das necessidades, pode facilitar a conexão entre quem precisa e quem deseja ajudar, reduzindo o constrangimento.</div>
+ <h2 class="section-title">Como a plataforma funcionaria</h2>
+ <section class="flow">
+  <div class="step"><b>1. Pedido privado</b><span>Estudante procura a equipe responsável da escola.</span></div>
+  <div class="step"><b>2. Avaliação</b><span>A escola verifica a necessidade e publica o pedido sem identificar o estudante.</span></div>
+  <div class="step"><b>3. Doação</b><span>Moradores e comerciantes consultam os pedidos e oferecem os itens.</span></div>
+  <div class="step"><b>4. Entrega segura</b><span>A escola organiza a entrega de forma discreta e respeitosa.</span></div>
+ </section>
+ <h2 class="section-title">Conclusão e análise crítica da IA</h2>
+ <div class="callout"><b>Conclusão:</b> As conversas exploratórias indicaram receptividade à proposta e interesse em contribuir. Também mostraram a importância de explicar que a iniciativa complementa as políticas públicas e de proteger a identidade dos estudantes. A próxima etapa é testar o fluxo em uma escola e registrar dados reais sobre pedidos e doações.<br><br><b>Uso crítico da IA:</b> A IA pode ajudar a organizar informações, sugerir gráficos e estruturar a apresentação. Porém, não deve inventar resultados nem substituir a escuta da comunidade. Neste painel, os números representam somente a composição real dos 22 participantes; as opiniões foram mantidas como relatos qualitativos, pois não houve contagem formal das respostas.</div>
+ <footer>“Ajudar sem expor. Conectar para transformar.”</footer>
+</main>
+<script>
+const select=document.getElementById('grupo');
+function update(){
+ const g=select.value;
+ let p=g==='alunos'||g==='comunidade'?0:6, a=g==='professores'||g==='comunidade'?0:11, c=g==='professores'||g==='alunos'?0:5, t=p+a+c;
+ document.getElementById('total').textContent=t;
+ document.getElementById('prof').textContent=p;
+ document.getElementById('alunos').textContent=a;
+ document.getElementById('comunidade').textContent=c;
+ const max=Math.max(p,a,c,1), scale=150/max;
+ document.getElementById('bProf').style.height=(p?Math.max(5,p*scale):0)+'px';
+ document.getElementById('bAlunos').style.height=(a?Math.max(5,a*scale):0)+'px';
+ document.getElementById('vProf').textContent=p;
+ document.getElementById('vAlunos').textContent=a;
+ document.getElementById('bCom').style.height=(c?Math.max(5,c*scale):0)+'px';
+ document.getElementById('vCom').textContent=c;
+ document.getElementById('wrapProf').style.display=p?'flex':'none';
+ document.getElementById('wrapAlunos').style.display=a?'flex':'none';
+ document.getElementById('wrapCom').style.display=c?'flex':'none';
+ const pp=t?p/t*100:0, aa=t?a/t*100:0, cc=t?c/t*100:0;
+ document.getElementById('donut').setAttribute('data-total',t);\n document.getElementById('donut').style.background=t?`conic-gradient(var(--purple) 0 ${pp}%,var(--pink) ${pp}% 100%)`:'#eee';
+ document.getElementById('donut').querySelector?.('after');
+ document.querySelector('.donut').style.setProperty('--center',t);
+ document.querySelector('.donut').style.setProperty('opacity',t?1:.35);
+ document.querySelector('.donut').style.setProperty('background',t?`conic-gradient(var(--purple) 0 ${pp}%,var(--pink) ${pp}% 100%)`:'#eee');
+ document.querySelector('.donut').after;
+ document.getElementById('legProf').textContent='Professores: '+(t?pp.toFixed(1).replace('.',','):'0,0')+'%';
+ document.getElementById('legAlunos').textContent='Estudantes: '+(t?aa.toFixed(1).replace('.',','):'0,0')+'%';
+ document.getElementById('legCom').textContent='Comunidade externa: '+(t?cc.toFixed(1).replace('.',','):'0,0')+'%';
+}
+select.addEventListener('change',update);update();
+</script>
+</body></html>
